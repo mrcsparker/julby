@@ -1,8 +1,5 @@
 # Julby
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/julby`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
 
 ## Installation
 
@@ -20,6 +17,14 @@ Or install it yourself as:
 
     $ gem install julby
 
+### MAC OS X problems
+
+MAC OS X El Capitan has disabled processes from accessing `DYLD_LIBRARY_PATH`.  If you have problems loading `libjulia.dylib`, add `libjulia.dylib` to your application path by running the following command (point to your version of `libjulia.dylib`):
+
+```bash
+export JULIA_DYLIB=/Applications/Julia-0.4.5.app/Contents/Resources/julia/lib/julia/libjulia.dylib
+```
+
 ## Usage
 
 TODO: Write usage instructions here
@@ -32,5 +37,5 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/julby.
+Bug reports and pull requests are welcome on GitHub at https://github.com/mrcsparker/julby.
 

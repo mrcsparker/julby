@@ -5,7 +5,12 @@ describe Julby do
     expect(Julby::VERSION).not_to be nil
   end
 
-  it 'does something useful' do
-    expect(false).to eq(true)
+  it 'loads the base Julby class' do
+    expect(Julby).to eq(Julby)
+  end
+
+  it 'can initialize Julia' do
+    Julby.jl_init(julia_path)
+    expect(Julby.jl_is_initialized).to eq(1)
   end
 end
