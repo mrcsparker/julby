@@ -1,5 +1,7 @@
 require "julby/version"
+require 'julby/bridge'
 require 'ffi'
+
 
 module Julby
   extend FFI::Library
@@ -58,7 +60,8 @@ module Julby
   # DLLEXPORT jl_value_t *jl_box32(jl_datatype_t *t, int32_t x);
   attach_function :jl_box32, [:pointer, :int32_t], :pointer
   # DLLEXPORT jl_value_t *jl_box64(jl_datatype_t *t, int64_t x);
-  attach_function :jl_unbox_bool, [:pointer, :int64_t], :pointer
+  attach_function :jl_box64, [:pointer, :int64_t], :pointer
+
   # DLLEXPORT int8_t jl_unbox_bool(jl_value_t *v);
   attach_function :jl_unbox_bool, [:pointer], :int8_t
   # DLLEXPORT int8_t jl_unbox_int8(jl_value_t *v);
@@ -131,4 +134,17 @@ module Julby
   attach_function :jl_eval_string, [:pointer], :pointer
 
   # ast access
+
+  def self.init(path)
+    Julby.jl_init(path)
+  end
+
+  def self.is_initialized?
+    Julby.jl_is_initialized == 1
+  end
+
+  def self.evaluate(s)
+    b = Julby::Bridge.new
+    b.evaluate(s)
+  end
 end
